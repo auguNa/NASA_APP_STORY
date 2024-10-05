@@ -9,5 +9,4 @@ public class NasaAppStoryApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(NasaAppStoryApplication.class, args);
 	}
-
 }
