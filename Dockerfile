@@ -1,27 +1,14 @@
-# Use the official OpenJDK image as the base image
-FROM openjdk:17-jdk-slim AS build
+# Use OpenJDK 22 as the base image
+FROM openjdk:22-jdk-slim
 
-# Set the working directory inside the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the Maven project files to the container
-COPY pom.xml .
-COPY src ./src
+# Copy the Maven build output to the working directory
+COPY target/nasa-app-0.0.1-SNAPSHOT.jar nasa-app.jar
 
-# Build the application using Maven
-RUN ./mvnw clean package -DskipTests
-
-# Create a new image for the runtime
-FROM openjdk:17-jre-slim
-
-# Set the working directory for the runtime
-WORKDIR /app
-
-# Copy the built JAR file from the build stage
-COPY --from=build /app/target/*.jar app.jar
-
-# Expose the application port (default is 8080)
+# Expose the application's port (change this if your application uses a different port)
 EXPOSE 8080
 
-# Specify the command to run the application
-CMD ["java", "-jar", "app.jar"]
+# Command to run the application
+ENTRYPOINT ["java", "-jar", "nasa-app.jar"]
