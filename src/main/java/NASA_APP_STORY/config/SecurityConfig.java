@@ -22,7 +22,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
-                        .requestMatchers("/odiac-data", "/heatmap-data").permitAll()
+                        .requestMatchers("/odiac-data", "/heatmap-data", "/pollution-data").permitAll()
                         .requestMatchers("/api/admin/pets/**").hasRole("ADMIN")
                         .requestMatchers("/api/auth/me").authenticated()
                         .requestMatchers("/set", "/get").permitAll()
