@@ -1,14 +1,14 @@
-# Use OpenJDK 22 as the base image
-FROM openjdk:22-jdk-slim
+# Use an official OpenJDK image
+FROM openjdk:17-jdk-alpine
 
-# Set the working directory in the container
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Maven build output to the working directory
+# Copy the generated JAR file to the container
 COPY target/nasa-app-0.0.1-SNAPSHOT.jar nasa-app.jar
 
-# Expose the application's port (change this if your application uses a different port)
+# Expose the port Spring Boot will run on
 EXPOSE 8080
 
-# Command to run the application
+# Run the JAR file
 ENTRYPOINT ["java", "-jar", "nasa-app.jar"]
