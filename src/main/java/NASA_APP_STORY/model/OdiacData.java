@@ -26,6 +26,7 @@ public class OdiacData {
 
         @JsonProperty("end_datetime")
         private String endDateTime;
+
     }
 
     @Data
