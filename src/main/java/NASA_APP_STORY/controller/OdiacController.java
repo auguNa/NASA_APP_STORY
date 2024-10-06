@@ -7,25 +7,31 @@ import NASA_APP_STORY.service.OdiacDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 @RestController
 public class OdiacController {
 
+    private static final Logger logger = LoggerFactory.getLogger(OdiacController.class);
+
     @Autowired
     private OdiacDataService odiacDataService;
 
-    // Endpoint for getting raw ODIAC data
     @GetMapping("/odiac-data")
     public JsonNode getOdiacData() {
+        logger.info("Fetching raw ODIAC data");
         return odiacDataService.fetchOdiacData();
     }
 
-    // Endpoint for getting processed data points for heatmap
     @GetMapping("/heatmap-data")
     public List<CO2DataPoint> getHeatmapData() {
+        logger.info("Fetching heatmap data");
         JsonNode data = odiacDataService.fetchOdiacData();
-        return odiacDataService.extractCO2DataForHeatMap(data);
+        List<CO2DataPoint> heatmapData = odiacDataService.extractCO2DataForHeatMap(data);
+        logger.info("Returning heatmap data with {} points", heatmapData.size());
+        return heatmapData;
     }
 }

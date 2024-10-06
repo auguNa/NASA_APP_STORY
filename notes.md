@@ -55,3 +55,10 @@ If you still face issues, check the Docker logs for more information:
 bash
 
 docker logs <container-id>
+
+
+It seems that the process listening on port 8080 is still not showing its process ID (PID), which is unusual. You can try forcefully releasing the port with fuser, as mentioned earlier. Run the following command:
+
+bash
+
+sudo fuser -k 8080/tcp
