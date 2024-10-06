@@ -18,6 +18,8 @@ public class CarbonFootPrint {
 
     private LocalDateTime date;
 
+    private Double score;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
